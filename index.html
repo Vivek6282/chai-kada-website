@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ജോസേട്ടന്റെ 
+ചായക്കട</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <a href="intro.html" class="back-btn">Home Page</a>
+    
+    <h1>🍛 ജോസേട്ടന്റെ 
+ചായക്കട 🍛</h1>
+    <p>Authentic Kerala Street Snacks</p>
+</header>
+
+<section class="menu">
+<h2>Our Menu</h2>
+<div class="menu-container">
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Uzhunnuvada.jpg');">
+        <h3>ഉഴുന്ന് വട</h3>
+        <p>₹25</p>
+        <button onclick="addToCart('Uzhunnu Vada',25)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/banana.jpg');">
+    <h3>പഴംപൊരി</h3>
+    <p>₹30</p>
+    <button onclick="addToCart('Pazham Pori',30)">Add to Cart</button>
+</div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Parippuvada.jpg');">
+        <h3>പരിപ്പ് വട</h3>
+        <p>₹20</p>
+        <button onclick="addToCart('Parippu Vada',20)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Sukhiyan.jpg');">
+        <h3>സുഖിയൻ</h3>
+        <p>₹20</p>
+        <button onclick="addToCart('Sukhiyan',20)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kappabajji.jpg');">
+        <h3>കപ്പ ബജ്ജി</h3>
+        <p>₹40</p>
+        <button onclick="addToCart('Kappa Bajji',40)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url(images/eggbond.jpg);">
+        <h3>എഗ് ബോണ്ട്</h3>
+        <p>₹35</p>
+        <button onclick="addToCart('Egg Bonda',35)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Tea.jpg');">
+        <h3>ചായ</h3>
+        <p>₹15</p>
+        <button onclick="addToCart('Tea',15)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Coffee .jpg');">
+        <h3>കാപ്പി</h3>
+        <p>₹20</p>
+        <button onclick="addToCart('Coffee',20)">Add to Cart</button>
+    </div>
+
+    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kallumkkaya.jpg');">
+        <h3>കല്ലുമ്മക്കായ</h3>
+        <p>₹100</p>
+        <button onclick="addToCart('Kallummakkaya',100)">Add to Cart</button>
+    </div>
+
+</div>
+
+
+
+</section>
+
+<div class="floating-cart" onclick="toggleCart()">
+    🛒
+    <span id="cart-badge">0</span>
+</div>
+
+<div id="cart-modal" class="cart-modal">
+    <div class="cart-modal-content">
+        <span class="close-btn" onclick="toggleCart()">&times;</span>
+        
+        <h2>🛒 Your Bill</h2>
+        <ul id="cart-items"></ul>
+        <h3>Total: ₹<span id="total">0</span></h3>
+        
+        <div class="cart-actions">
+            <button onclick="clearCart()" style="background: #757575;">Clear All</button>
+            <button onclick="placeOrder()">Pay Bill</button>
+        </div>
+        <p id="confirmation"></p>
+    </div>
+</div>
+
+<script>
+    console.log('Script loaded');
+    let cart = [];
+    let total = 0;
+
+    // 🆕 NEW: Function to open and close the floating cart popup
+    function toggleCart() {
+        const modal = document.getElementById('cart-modal');
+        if (modal.style.display === "flex") {
+            modal.style.display = "none";
+        } else {
+            modal.style.display = "flex";
+        }
+    }
+
+    // Function to add item
+    function addToCart(name, price) {
+        console.log('addToCart called', { name, price });
+        
+        // Validation
+        if (typeof name !== 'string' || typeof price !== 'number') {
+            console.error('addToCart invalid args', name, price);
+            return;
+        }
+
+        // Clear "Order Placed" message if user adds new items
+        document.getElementById("confirmation").innerHTML = "";
+
+        cart.push({ name, price });
+        total += price;
+        updateCart();
+    }
+
+    // Function to remove a single item
+    function removeFromCart(index) {
+        console.log('removeFromCart called', index);
+        if (index > -1 && index < cart.length) {
+            total -= cart[index].price; // Subtract price
+            cart.splice(index, 1);      // Remove from array
+            updateCart();               // Update screen
+        }
+    }
+
+    // Function to clear everything
+    function clearCart() {
+        console.log('clearCart called');
+        if (cart.length === 0) {
+            alert("Cart is already empty!");
+            return;
+        }
+        cart = [];
+        total = 0;
+        document.getElementById("confirmation").innerHTML = "";
+        updateCart();
+    }
+
+    // Function to update the UI
+    function updateCart() {
+        const list = document.getElementById("cart-items");
+        const totalDisplay = document.getElementById("total");
+        const badge = document.getElementById("cart-badge"); // 🆕 Grab the red badge
+
+        if (!list || !totalDisplay) {
+            console.error('updateCart: missing DOM elements');
+            return;
+        }
+
+        list.innerHTML = "";
+
+        cart.forEach((item, index) => {
+            const li = document.createElement("li");
+            
+            // Item text
+            const span = document.createElement("span");
+            span.textContent = `${item.name} - ₹${item.price} `;
+            
+            // Remove (X) Button
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.style.marginLeft = "10px";
+            removeBtn.style.padding = "2px 6px";
+            removeBtn.style.fontSize = "0.8rem";
+            removeBtn.style.background = "#ff5252"; 
+            removeBtn.style.color = "white";
+            removeBtn.style.border = "none";
+            removeBtn.style.borderRadius = "4px";
+            removeBtn.style.cursor = "pointer";
+            removeBtn.onclick = () => removeFromCart(index);
+
+            li.appendChild(span);
+            li.appendChild(removeBtn);
+            list.appendChild(li);
+        });
+
+        totalDisplay.textContent = total;
+        
+        // 🆕 NEW: Update the red number on the floating cart icon!
+        if (badge) {
+            badge.textContent = cart.length;
+        }
+    }
+
+    // Function to place order
+    function placeOrder() {
+        console.log('placeOrder called', { cart, total });
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+
+        // Kept your larger 90px rich.jpg image!
+        document.getElementById("confirmation").innerHTML = 
+            "✅ Order placed! നന്ദി — വീണ്ടും വരിക <img src='images/rich.jpg' style='width: 90px; vertical-align: middle; margin-left: 5px;'>";
+
+        cart = [];
+        total = 0;
+        updateCart();
+    }
+
+    // Expose functions to HTML buttons
+    window.toggleCart = toggleCart; // 🆕 Expose the toggle function
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
+    window.clearCart = clearCart;
+    window.placeOrder = placeOrder;
+
+</script>
+</body>
+</html>
