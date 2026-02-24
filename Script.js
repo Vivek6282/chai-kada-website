@@ -1,127 +1,142 @@
-<script>
-    console.log('Script loaded');
-    let cart = [];
-    let total = 0;
+let currentLanguage = 'en'; // English is the default
 
-    // 🆕 NEW: Function to open and close the floating cart popup
-    function toggleCart() {
-        const modal = document.getElementById('cart-modal');
-        if (modal.style.display === "flex") {
-            modal.style.display = "none";
-        } else {
-            modal.style.display = "flex";
-        }
+const translations = {
+    en: {
+        cartTitle: "Shopping Cart",
+        emptyAlert: "Your cart is empty!",
+        orderSuccess: "✅ Order placed! Thank you — come again 🙂"
+    },
+    ml: {
+        cartTitle: "ഷോപ്പിംഗ് കാർട്ട്",
+        emptyAlert: "നിങ്ങളുടെ കാർട്ട് ശൂന്യമാണ്!",
+        orderSuccess: "✅ ഓർഡർ നൽകി! നന്ദി — വീണ്ടും വരിക 🙂"
+    }
+};
+
+let cart = [];
+let total = 0;
+
+function switchLanguage(lang) {
+    // 1. Update the active language
+    currentLanguage = lang;
+    
+    // 2. Change the main cart title
+    document.getElementById("cart-title").textContent = translations[currentLanguage].cartTitle;
+    
+    // 3. Clear any confirmation messages so they don't get stuck in the wrong language
+    document.getElementById("confirmation").textContent = "";
+    
+    console.log("Language switched to:", lang);
+}
+
+// Expose it to the window just like your other functions
+window.switchLanguage = switchLanguage;
+
+function addToCart(name, price) {
+    console.log('addToCart called', { name, price });
+    if (typeof name !== 'string' || typeof price !== 'number') {
+        console.error('addToCart invalid args', name, price);
+        return;
     }
 
-    // Function to add item
-    function addToCart(name, price) {
-        console.log('addToCart called', { name, price });
+    // Clear any previous success messages when modifying cart
+    document.getElementById("confirmation").textContent = "";
+
+    cart.push({ name, price });
+    total += price;
+    updateCart();
+}
+
+// 🆕 NEW: Function to remove a specific item by its index in the array
+function removeFromCart(index) {
+    console.log('removeFromCart called', index);
+    
+    // Check if the item exists
+    if (index > -1 && index < cart.length) {
+        // Subtract the price of the item being removed
+        total -= cart[index].price;
         
-        // Validation
-        if (typeof name !== 'string' || typeof price !== 'number') {
-            console.error('addToCart invalid args', name, price);
-            return;
-        }
-
-        // Clear "Order Placed" message if user adds new items
-        document.getElementById("confirmation").innerHTML = "";
-
-        cart.push({ name, price });
-        total += price;
-        updateCart();
-    }
-
-    // Function to remove a single item
-    function removeFromCart(index) {
-        console.log('removeFromCart called', index);
-        if (index > -1 && index < cart.length) {
-            total -= cart[index].price; // Subtract price
-            cart.splice(index, 1);      // Remove from array
-            updateCart();               // Update screen
-        }
-    }
-
-    // Function to clear everything
-    function clearCart() {
-        console.log('clearCart called');
-        if (cart.length === 0) {
-            alert("Cart is already empty!");
-            return;
-        }
-        cart = [];
-        total = 0;
-        document.getElementById("confirmation").innerHTML = "";
-        updateCart();
-    }
-
-    // Function to update the UI
-    function updateCart() {
-        const list = document.getElementById("cart-items");
-        const totalDisplay = document.getElementById("total");
-        const badge = document.getElementById("cart-badge"); // 🆕 Grab the red badge
-
-        if (!list || !totalDisplay) {
-            console.error('updateCart: missing DOM elements');
-            return;
-        }
-
-        list.innerHTML = "";
-
-        cart.forEach((item, index) => {
-            const li = document.createElement("li");
-            
-            // Item text
-            const span = document.createElement("span");
-            span.textContent = `${item.name} - ₹${item.price} `;
-            
-            // Remove (X) Button
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Remove";
-            removeBtn.style.marginLeft = "10px";
-            removeBtn.style.padding = "2px 6px";
-            removeBtn.style.fontSize = "0.8rem";
-            removeBtn.style.background = "#ff5252"; 
-            removeBtn.style.color = "white";
-            removeBtn.style.border = "none";
-            removeBtn.style.borderRadius = "4px";
-            removeBtn.style.cursor = "pointer";
-            removeBtn.onclick = () => removeFromCart(index);
-
-            li.appendChild(span);
-            li.appendChild(removeBtn);
-            list.appendChild(li);
-        });
-
-        totalDisplay.textContent = total;
+        // Remove the item from the array
+        cart.splice(index, 1);
         
-        // 🆕 NEW: Update the red number on the floating cart icon!
-        if (badge) {
-            badge.textContent = cart.length;
-        }
-    }
-
-    // Function to place order
-    function placeOrder() {
-        console.log('placeOrder called', { cart, total });
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
-        }
-
-        // Kept your larger 90px rich.jpg image!
-        document.getElementById("confirmation").innerHTML = 
-            "✅ Order placed! നന്ദി — വീണ്ടും വരിക <img src='images/rich.jpg' style='width: 90px; vertical-align: middle; margin-left: 5px;'>";
-
-        cart = [];
-        total = 0;
+        // Update the display
         updateCart();
     }
+}
 
-    // Expose functions to HTML buttons
-    window.toggleCart = toggleCart; // 🆕 Expose the toggle function
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
-    window.clearCart = clearCart;
-    window.placeOrder = placeOrder;
+// 🆕 NEW: Function to clear the entire cart
+function clearCart() {
+    console.log('clearCart called');
+    if(cart.length === 0) {
+        alert("Cart is already empty!");
+        return;
+    }
+    
+    // Reset everything
+    cart = [];
+    total = 0;
+    document.getElementById("confirmation").textContent = "";
+    updateCart();
+}
 
-</script>
+function updateCart() {
+    const list = document.getElementById("cart-items");
+    const totalDisplay = document.getElementById("total");
+
+    if (!list || !totalDisplay) {
+        console.error('updateCart: missing DOM elements', { list, totalDisplay });
+        return;
+    }
+
+    list.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        
+        // Display item name and price
+        // We wrap the text in a span so it sits nicely next to the button
+        const textSpan = document.createElement("span");
+        textSpan.textContent = `${item.name} - ₹${item.price} `;
+        
+        // Create a remove button for this specific item
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "❌";
+        removeBtn.style.marginLeft = "10px";
+        removeBtn.style.padding = "2px 6px";
+        removeBtn.style.fontSize = "0.8rem";
+        removeBtn.style.background = "#ff5252"; // Red color for delete
+        removeBtn.title = "Remove this item";
+        
+        // When clicked, call removeFromCart with this specific index
+        removeBtn.onclick = () => removeFromCart(index);
+
+        li.appendChild(textSpan);
+        li.appendChild(removeBtn);
+        list.appendChild(li);
+    });
+
+    totalDisplay.textContent = total;
+    console.log('updateCart done', { cart, total });
+}
+
+function placeOrder() {
+    console.log('placeOrder called', { cart, total });
+    if (cart.length === 0) {
+        // Look up the alert in the dictionary!
+        alert(translations[currentLanguage].emptyAlert);
+        return;
+    }
+
+    // Look up the success message in the dictionary!
+    document.getElementById("confirmation").textContent = translations[currentLanguage].orderSuccess;
+
+    cart = [];
+    total = 0;
+    updateCart();
+}
+
+// Expose functions to the window so HTML can see them
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.clearCart = clearCart;
+window.placeOrder = placeOrder;
