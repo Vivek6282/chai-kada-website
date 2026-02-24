@@ -84,7 +84,7 @@ p{
 .item p {
     margin: 6px 0 12px;
     font-weight: bold;
-    color: #ffd54f; /* A nice yellow for the price */
+    color: #ffffff;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
 }
 
@@ -323,4 +323,5 @@ h3 {
     justify-content: center;
     gap: 15px;
     margin-top: 25px;
+
 }
