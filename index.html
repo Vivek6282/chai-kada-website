@@ -1,233 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>ജോസേട്ടന്റെ 
-ചായക്കട</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>ജോസേട്ടന്റെ
+        ചായക്കട</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-    <a href="intro.html" class="back-btn">Home Page</a>
-    
-    <h1>🍛 ജോസേട്ടന്റെ 
-ചായക്കട 🍛</h1>
-    <p>Authentic Kerala Street Snacks</p>
-</header>
+    <header>
+        <a href="intro.html" class="back-btn">Home Page</a>
 
-<section class="menu">
-<h2>Our Menu</h2>
-<div class="menu-container">
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Uzhunnuvada.jpg');">
-        <h3>ഉഴുന്ന് വട</h3>
-        <p>₹25</p>
-        <button onclick="addToCart('Uzhunnu Vada',25)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/banana.jpg');">
-    <h3>പഴംപൊരി</h3>
-    <p>₹30</p>
-    <button onclick="addToCart('Pazham Pori',30)">Add to Cart</button>
-</div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Parippuvada.jpg');">
-        <h3>പരിപ്പ് വട</h3>
-        <p>₹20</p>
-        <button onclick="addToCart('Parippu Vada',20)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Sukhiyan.jpg');">
-        <h3>സുഖിയൻ</h3>
-        <p>₹20</p>
-        <button onclick="addToCart('Sukhiyan',20)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kappabajji.jpg');">
-        <h3>കപ്പ ബജ്ജി</h3>
-        <p>₹40</p>
-        <button onclick="addToCart('Kappa Bajji',40)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url(images/eggbond.jpg);">
-        <h3>എഗ് ബോണ്ട്</h3>
-        <p>₹35</p>
-        <button onclick="addToCart('Egg Bonda',35)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Tea.jpg');">
-        <h3>ചായ</h3>
-        <p>₹15</p>
-        <button onclick="addToCart('Tea',15)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Coffee .jpg');">
-        <h3>കാപ്പി</h3>
-        <p>₹20</p>
-        <button onclick="addToCart('Coffee',20)">Add to Cart</button>
-    </div>
-
-    <div class="item" style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kallumkkaya.jpg');">
-        <h3>കല്ലുമ്മക്കായ</h3>
-        <p>₹100</p>
-        <button onclick="addToCart('Kallummakkaya',100)">Add to Cart</button>
-    </div>
-
-</div>
-
-
-
-</section>
-
-<div class="floating-cart" onclick="toggleCart()">
-    🛒
-    <span id="cart-badge">0</span>
-</div>
-
-<div id="cart-modal" class="cart-modal">
-    <div class="cart-modal-content">
-        <span class="close-btn" onclick="toggleCart()">&times;</span>
-        
-        <h2>🛒 Your Bill</h2>
-        <ul id="cart-items"></ul>
-        <h3>Total: ₹<span id="total">0</span></h3>
-        
-        <div class="cart-actions">
-            <button onclick="clearCart()" style="background: #757575;">Clear All</button>
-            <button onclick="placeOrder()">Pay Bill</button>
+        <div class="language-switcher">
+            <button onclick="changeLanguage('en')">🇬🇧 EN</button>
+            <button onclick="changeLanguage('ml')">🇮🇳 ML</button>
+            <button onclick="changeLanguage('hi')">🇮🇳 HI</button>
         </div>
-        <p id="confirmation"></p>
+
+        <h1 id="main-title">🍛 ജോസേട്ടന്റെ ചായക്കട 🍛</h1>
+        <p id="main-subtitle">Authentic Kerala Street Snacks</p>
+    </header>
+
+    <section class="menu">
+        <h2 id="menu-title">Our Menu</h2>
+        <div class="menu-container">
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Uzhunnuvada.jpg');">
+                <h3 id="name-Uzhunnu-Vada">ഉഴുന്ന് വട</h3>
+                <p>₹25</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Uzhunnu Vada', 25, -1)">-</button>
+                    <span id="qty-Uzhunnu-Vada">0</span>
+                    <button onclick="changeQuantity('Uzhunnu Vada', 25, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/banana.jpg');">
+                <h3 id="name-Pazham-Pori">പഴംപൊരി</h3>
+                <p>₹30</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Pazham Pori', 30, -1)">-</button>
+                    <span id="qty-Pazham-Pori">0</span>
+                    <button onclick="changeQuantity('Pazham Pori', 30, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Parippuvada.jpg');">
+                <h3 id="name-Parippu-Vada">പരിപ്പ് വട</h3>
+                <p>₹20</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Parippu Vada', 20, -1)">-</button>
+                    <span id="qty-Parippu-Vada">0</span>
+                    <button onclick="changeQuantity('Parippu Vada', 20, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Sukhiyan.jpg');">
+                <h3 id="name-Sukhiyan">സുഖിയൻ</h3>
+                <p>₹20</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Sukhiyan', 20, -1)">-</button>
+                    <span id="qty-Sukhiyan">0</span>
+                    <button onclick="changeQuantity('Sukhiyan', 20, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kappabajji.jpg');">
+                <h3 id="name-Kappa-Bajji">കപ്പ ബജ്ജി</h3>
+                <p>₹40</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Kappa Bajji', 40, -1)">-</button>
+                    <span id="qty-Kappa-Bajji">0</span>
+                    <button onclick="changeQuantity('Kappa Bajji', 40, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url(images/eggbond.jpg);">
+                <h3 id="name-Egg-Bonda">എഗ് ബോണ്ട്</h3>
+                <p>₹35</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Egg Bonda', 35, -1)">-</button>
+                    <span id="qty-Egg-Bonda">0</span>
+                    <button onclick="changeQuantity('Egg Bonda', 35, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Tea.jpg');">
+                <h3 id="name-Tea">ചായ</h3>
+                <p>₹15</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Tea', 15, -1)">-</button>
+                    <span id="qty-Tea">0</span>
+                    <button onclick="changeQuantity('Tea', 15, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Coffee .jpg');">
+                <h3 id="name-Coffee">കാപ്പി</h3>
+                <p>₹20</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Coffee', 20, -1)">-</button>
+                    <span id="qty-Coffee">0</span>
+                    <button onclick="changeQuantity('Coffee', 20, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item"
+                style="background-image: linear-gradient(rgba(0,0,0,0.0), rgba(0,0,0,0.0)), url('images/Kallumkkaya.jpg');">
+                <h3 id="name-Kallummakkaya">കല്ലുമ്മക്കായ</h3>
+                <p>₹100</p>
+                <div class="quantity-controls">
+                    <button onclick="changeQuantity('Kallummakkaya', 100, -1)">-</button>
+                    <span id="qty-Kallummakkaya">0</span>
+                    <button onclick="changeQuantity('Kallummakkaya', 100, 1)">+</button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+    <div class="floating-cart" onclick="toggleCart()">
+        🛒
+        <span id="cart-badge">0</span>
     </div>
-</div>
 
-<script>
-    console.log('Script loaded');
-    let cart = [];
-    let total = 0;
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-btn" onclick="toggleCart()">&times;</span>
 
-    // 🆕 NEW: Function to open and close the floating cart popup
-    function toggleCart() {
-        const modal = document.getElementById('cart-modal');
-        if (modal.style.display === "flex") {
-            modal.style.display = "none";
-        } else {
-            modal.style.display = "flex";
+            <h2 id="cart-title">🛒 Your Bill</h2>
+            <ul id="cart-items"></ul>
+            <h3><span id="total-label">Total</span>: ₹<span id="total">0</span></h3>
+
+            <div class="cart-actions">
+                <button id="clear-btn" onclick="clearCart()" style="background: #757575;">Clear All</button>
+                <button id="pay-btn" onclick="placeOrder()">Pay Bill</button>
+            </div>
+            <p id="confirmation"></p>
+        </div>
+    </div>
+
+    <script>
+        console.log('Script loaded');
+        let cart = [];
+        let total = 0;
+        let currentLang = 'ml'; // Default to Malayalam
+
+        const translations = {
+            en: {
+                mainTitle: "🍛 Josettante Chai Kada 🍛",
+                mainSubtitle: "Authentic Kerala Street Snacks",
+                menuTitle: "Our Menu",
+                cartTitle: "🛒 Your Bill",
+                totalLabel: "Total",
+                clearBtn: "Clear All",
+                payBtn: "Pay Bill",
+                removeBtn: "Remove",
+                emptyCart: "Your cart is empty!",
+                orderPlaced: "✅ Order placed! Thank you — come again",
+                items: {
+                    "Uzhunnu Vada": "Uzhunnu Vada",
+                    "Pazham Pori": "Pazham Pori",
+                    "Parippu Vada": "Parippu Vada",
+                    "Sukhiyan": "Sukhiyan",
+                    "Kappa Bajji": "Kappa Bajji",
+                    "Egg Bonda": "Egg Bonda",
+                    "Tea": "Tea",
+                    "Coffee": "Coffee",
+                    "Kallummakkaya": "Kallummakkaya"
+                }
+            },
+            ml: {
+                mainTitle: "🍛 ജോസേട്ടന്റെ ചായക്കട 🍛",
+                mainSubtitle: "നല്ല തനി നാടൻ പലഹാരങ്ങൾ",
+                menuTitle: "ഞങ്ങളുടെ വിഭവങ്ങൾ",
+                cartTitle: "🛒 നിങ്ങളുടെ ബില്ല്",
+                totalLabel: "ആകെ",
+                clearBtn: "എല്ലാം ഒഴിവാക്കുക",
+                payBtn: "പണമടയ്ക്കുക",
+                removeBtn: "മാറ്റുക",
+                emptyCart: "നിങ്ങളുടെ കാർട്ട് ശൂന്യമാണ്!",
+                orderPlaced: "✅ ഓർഡർ നൽകി! നന്ദി — വീണ്ടും വരിക",
+                items: {
+                    "Uzhunnu Vada": "ഉഴുന്ന് വട",
+                    "Pazham Pori": "പഴംപൊരി",
+                    "Parippu Vada": "പരിപ്പ് വട",
+                    "Sukhiyan": "സുഖിയൻ",
+                    "Kappa Bajji": "കപ്പ ബജ്ജി",
+                    "Egg Bonda": "എഗ് ബോണ്ട്",
+                    "Tea": "ചായ",
+                    "Coffee": "കാപ്പി",
+                    "Kallummakkaya": "കല്ലുമ്മക്കായ"
+                }
+            },
+            hi: {
+                mainTitle: "🍛 जोसेट्टन की चाय की दुकान 🍛",
+                mainSubtitle: "केरल के प्रामाणिक स्ट्रीट स्नैक्स",
+                menuTitle: "हमारा मेनू",
+                cartTitle: "🛒 आपका बिल",
+                totalLabel: "कुल",
+                clearBtn: "सब साफ करें",
+                payBtn: "बिल भुगतान",
+                removeBtn: "निकालें",
+                emptyCart: "आपका कार्ट खाली है!",
+                orderPlaced: "✅ ऑर्डर दे दिया गया! धन्यवाद — फिर आएं",
+                items: {
+                    "Uzhunnu Vada": "उड़द वड़ा",
+                    "Pazham Pori": "केला बज्जी",
+                    "Parippu Vada": "दाल वड़ा",
+                    "Sukhiyan": "सुखियन",
+                    "Kappa Bajji": "कप्पा बज्जी",
+                    "Egg Bonda": "अंडा बोंडा",
+                    "Tea": "चाय",
+                    "Coffee": "कॉफी",
+                    "Kallummakkaya": "कल्लुमक्काया"
+                }
+            }
+        };
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Update UI static text
+            document.getElementById('main-title').textContent = t.mainTitle;
+            document.getElementById('main-subtitle').textContent = t.mainSubtitle;
+            document.getElementById('menu-title').textContent = t.menuTitle;
+            document.getElementById('cart-title').textContent = t.cartTitle;
+            document.getElementById('total-label').textContent = t.totalLabel;
+            document.getElementById('clear-btn').textContent = t.clearBtn;
+            document.getElementById('pay-btn').textContent = t.payBtn;
+
+            // Update Menu Item Names
+            for (const itemKey in t.items) {
+                const id = `name-${itemKey.replace(/ /g, '-')}`;
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = t.items[itemKey];
+                }
+            }
+
+            // Update Cart and confirmation if visible
+            updateCart();
+            if (document.getElementById("confirmation").innerHTML.includes("Order placed") ||
+                document.getElementById("confirmation").innerHTML.includes("ഓർഡർ നൽകി") ||
+                document.getElementById("confirmation").innerHTML.includes("ऑर्डर दे दिया गया")) {
+                document.getElementById("confirmation").innerHTML =
+                    `${t.orderPlaced} <img src='images/rich.jpg' style='width: 90px; vertical-align: middle; margin-left: 5px;'>`;
+            }
         }
-    }
 
-    // Function to add item
-    function addToCart(name, price) {
-        console.log('addToCart called', { name, price });
-        
-        // Validation
-        if (typeof name !== 'string' || typeof price !== 'number') {
-            console.error('addToCart invalid args', name, price);
-            return;
+        // 🆕 NEW: Function to open and close the floating cart popup
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            if (modal.style.display === "flex") {
+                modal.style.display = "none";
+            } else {
+                modal.style.display = "flex";
+            }
         }
 
-        // Clear "Order Placed" message if user adds new items
-        document.getElementById("confirmation").innerHTML = "";
-
-        cart.push({ name, price });
-        total += price;
-        updateCart();
-    }
-
-    // Function to remove a single item
-    function removeFromCart(index) {
-        console.log('removeFromCart called', index);
-        if (index > -1 && index < cart.length) {
-            total -= cart[index].price; // Subtract price
-            cart.splice(index, 1);      // Remove from array
-            updateCart();               // Update screen
-        }
-    }
-
-    // Function to clear everything
-    function clearCart() {
-        console.log('clearCart called');
-        if (cart.length === 0) {
-            alert("Cart is already empty!");
-            return;
-        }
-        cart = [];
-        total = 0;
-        document.getElementById("confirmation").innerHTML = "";
-        updateCart();
-    }
-
-    // Function to update the UI
-    function updateCart() {
-        const list = document.getElementById("cart-items");
-        const totalDisplay = document.getElementById("total");
-        const badge = document.getElementById("cart-badge"); // 🆕 Grab the red badge
-
-        if (!list || !totalDisplay) {
-            console.error('updateCart: missing DOM elements');
-            return;
+        // 🆕 NEW: Function to handle quantity changes from the menu
+        function changeQuantity(name, price, delta) {
+            if (delta === 1) {
+                addToCart(name, price);
+            } else if (delta === -1) {
+                // Find the last index of the item with the given name
+                const index = cart.map(item => item.name).lastIndexOf(name);
+                if (index !== -1) {
+                    removeFromCart(index);
+                }
+            }
         }
 
-        list.innerHTML = "";
+        // Function to add item
+        function addToCart(name, price) {
+            console.log('addToCart called', { name, price });
 
-        cart.forEach((item, index) => {
-            const li = document.createElement("li");
-            
-            // Item text
-            const span = document.createElement("span");
-            span.textContent = `${item.name} - ₹${item.price} `;
-            
-            // Remove (X) Button
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Remove";
-            removeBtn.style.marginLeft = "10px";
-            removeBtn.style.padding = "2px 6px";
-            removeBtn.style.fontSize = "0.8rem";
-            removeBtn.style.background = "#ff5252"; 
-            removeBtn.style.color = "white";
-            removeBtn.style.border = "none";
-            removeBtn.style.borderRadius = "4px";
-            removeBtn.style.cursor = "pointer";
-            removeBtn.onclick = () => removeFromCart(index);
+            // Validation
+            if (typeof name !== 'string' || typeof price !== 'number') {
+                console.error('addToCart invalid args', name, price);
+                return;
+            }
 
-            li.appendChild(span);
-            li.appendChild(removeBtn);
-            list.appendChild(li);
-        });
+            // Clear "Order Placed" message if user adds new items
+            document.getElementById("confirmation").innerHTML = "";
 
-        totalDisplay.textContent = total;
-        
-        // 🆕 NEW: Update the red number on the floating cart icon!
-        if (badge) {
-            badge.textContent = cart.length;
-        }
-    }
-
-    // Function to place order
-    function placeOrder() {
-        console.log('placeOrder called', { cart, total });
-        if (cart.length === 0) {
-            alert("Your cart is empty!");
-            return;
+            cart.push({ name, price });
+            total += price;
+            updateCart();
         }
 
-        // Kept your larger 90px rich.jpg image!
-        document.getElementById("confirmation").innerHTML = 
-            "✅ Order placed! നന്ദി — വീണ്ടും വരിക <img src='images/rich.jpg' style='width: 90px; vertical-align: middle; margin-left: 5px;'>";
+        // Function to remove a single item
+        function removeFromCart(index) {
+            console.log('removeFromCart called', index);
+            if (index > -1 && index < cart.length) {
+                total -= cart[index].price; // Subtract price
+                cart.splice(index, 1);      // Remove from array
+                updateCart();               // Update screen
+            }
+        }
 
-        cart = [];
-        total = 0;
-        updateCart();
-    }
+        // Function to clear everything
+        function clearCart() {
+            console.log('clearCart called');
+            if (cart.length === 0) {
+                alert("Cart is already empty!");
+                return;
+            }
+            cart = [];
+            total = 0;
+            document.getElementById("confirmation").innerHTML = "";
+            updateCart();
+        }
 
-    // Expose functions to HTML buttons
-    window.toggleCart = toggleCart; // 🆕 Expose the toggle function
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
-    window.clearCart = clearCart;
-    window.placeOrder = placeOrder;
+        // Function to update the UI
+        function updateCart() {
+            const list = document.getElementById("cart-items");
+            const totalDisplay = document.getElementById("total");
+            const badge = document.getElementById("cart-badge"); // 🆕 Grab the red badge
 
-</script>
+            if (!list || !totalDisplay) {
+                console.error('updateCart: missing DOM elements');
+                return;
+            }
+
+            list.innerHTML = "";
+
+            // 🆕 Track counts for each item to update the menu UI
+            const counts = {};
+
+            cart.forEach((item, index) => {
+                const li = document.createElement("li");
+
+                // Update counts mapping
+                counts[item.name] = (counts[item.name] || 0) + 1;
+
+                // Item text - TRANSLATED
+                const translatedName = translations[currentLang].items[item.name] || item.name;
+                const span = document.createElement("span");
+                span.textContent = `${translatedName} - ₹${item.price} `;
+
+                // Remove (X) Button - TRANSLATED
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = translations[currentLang].removeBtn;
+                removeBtn.style.marginLeft = "10px";
+                removeBtn.style.padding = "2px 6px";
+                removeBtn.style.fontSize = "0.8rem";
+                removeBtn.style.background = "#ff5252";
+                removeBtn.style.color = "white";
+                removeBtn.style.border = "none";
+                removeBtn.style.borderRadius = "4px";
+                removeBtn.style.cursor = "pointer";
+                removeBtn.onclick = () => removeFromCart(index);
+
+                li.appendChild(span);
+                li.appendChild(removeBtn);
+                list.appendChild(li);
+            });
+
+            totalDisplay.textContent = total;
+
+            // 🆕 Update the red number on the floating cart icon!
+            if (badge) {
+                badge.textContent = cart.length;
+            }
+
+            // 🆕 NEW: Update all quantity spans in the menu
+            const menuItems = [
+                'Uzhunnu Vada', 'Pazham Pori', 'Parippu Vada',
+                'Sukhiyan', 'Kappa Bajji', 'Egg Bonda',
+                'Tea', 'Coffee', 'Kallummakkaya'
+            ];
+
+            menuItems.forEach(name => {
+                const id = `qty-${name.replace(/ /g, '-')}`;
+                const span = document.getElementById(id);
+                if (span) {
+                    span.textContent = counts[name] || 0;
+                }
+            });
+        }
+
+        // Function to place order
+        function placeOrder() {
+            const t = translations[currentLang];
+            console.log('placeOrder called', { cart, total });
+            if (cart.length === 0) {
+                alert(t.emptyCart);
+                return;
+            }
+
+            // Kept your larger 90px rich.jpg image!
+            document.getElementById("confirmation").innerHTML =
+                `${t.orderPlaced} <img src='images/rich.jpg' style='width: 90px; vertical-align: middle; margin-left: 5px;'>`;
+
+            cart = [];
+            total = 0;
+            updateCart();
+        }
+
+        // Expose functions to HTML buttons
+        window.changeLanguage = changeLanguage; // 🆕 Expose the translation function
+        window.toggleCart = toggleCart; // 🆕 Expose the toggle function
+        window.changeQuantity = changeQuantity; // 🆕 Expose the new function
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.clearCart = clearCart;
+        window.placeOrder = placeOrder;
+
+        // Initialize with Malayalam
+        changeLanguage('ml');
+    </script>
 </body>
+
 </html>
