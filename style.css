@@ -1,58 +1,87 @@
-body{
-    font-family:'Segoe UI', Arial, sans-serif;
-    margin:0;
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
     background:
-        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)),
+        linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
         url(images/richkada.png);
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* HEADER */
 header {
-    background: #1b4528; 
+    background: #1b4528;
     color: rgb(255, 255, 255);
     text-align: center;
     padding: 30px 15px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
     border-bottom: 4px solid #ffd54f;
-    
+
     /* 🆕 Add this line so the back button knows where to anchor itself */
-    position: relative; 
-}
-header h1{
-    margin:0;
-    font-size:3.99rem;
-    letter-spacing:1px;
-    text-shadow:0 2px 8px rgba(0,0,0,0.0);
+    position: relative;
 }
 
-p{
-    margin:0;
-    font-size:2.3rem;
-    letter-spacing:1px;
-    text-shadow:0 2px 8px rgba(0,0,0,0.0);
+/* LANGUAGE SWITCHER */
+.language-switcher {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.language-switcher button {
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.language-switcher button:hover {
+    background: #ffd54f;
+    color: #1b4528;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3.99rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.0);
+}
+
+p {
+    margin: 0;
+    font-size: 2.3rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.0);
 
 }
 
 /* MAIN PANELS */
-.menu,.cart{
-    padding:28px;
-    margin:30px auto;
-    width:92%;
-    max-width:950px;
-    background:rgba(255,255,255,0.77);
-    border-radius:18px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+.menu,
+.cart {
+    padding: 28px;
+    margin: 30px auto;
+    width: 92%;
+    max-width: 950px;
+    background: rgba(255, 255, 255, 0.77);
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* GRID */
-.menu-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    justify-content:center;
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
 }
 
 /* FOOD CARD */
@@ -65,110 +94,149 @@ p{
     /* Add these to make the background image behave nicely: */
     background-size: cover !important;
     background-position: center !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
     transition: 0.3s;
     position: relative;
-    
+
     /* Make the text white so it is readable over the image */
-    color: white; 
+    color: white;
 }
 
 /* Change the title text to white */
 .item h3 {
     margin: 8px 0 4px;
-    color: white; 
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8); /* Adds a shadow to make it pop */
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    /* Adds a shadow to make it pop */
 }
 
 /* Change the price text to white */
 .item p {
     margin: 6px 0 12px;
     font-weight: bold;
-    color: #ffffff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    color: #ffd54f;
+    /* A nice yellow for the price */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
-.item:hover{
-    transform:translateY(-8px) scale(1.03);
-    box-shadow:0 14px 28px rgba(0,0,0,0.28);
+.item:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
 }
 
 /* IMAGE */
-.item img{
-    width:100%;
-    height:140px;
-    object-fit:cover;
-    border-radius:10px;
-    margin-bottom:12px;
+.item img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
 }
 
 /* TEXT */
-.item h3{
-    margin:8px 0 4px;
-    color:#ffffff;
+.item h3 {
+    margin: 8px 0 4px;
+    color: #ffffff;
 }
 
-.item p{
-    margin:6px 0 12px;
-    font-weight:bold;
-    color:#ffffff;
+.item p {
+    margin: 6px 0 12px;
+    font-weight: bold;
+    color: #ffffff;
 }
 
 /* BUTTON */
-button{
-    background:linear-gradient(45deg,#ff5722,#ff9800);
-    color:white;
-    border:none;
-    padding:9px 15px;
-    cursor:pointer;
-    border-radius:8px;
-    font-weight:bold;
-    transition:0.2s;
+button {
+    background: linear-gradient(45deg, #ff5722, #ff9800);
+    color: white;
+    border: none;
+    padding: 9px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
-button:hover{
-    transform:scale(1.07);
-    box-shadow:0 6px 14px rgba(0,0,0,0.3);
+button:hover {
+    transform: scale(1.07);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* QUANTITY CONTROLS */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.quantity-controls button {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: #ffd54f;
+    color: #1b4528;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quantity-controls button:hover {
+    background: #ffca28;
+}
+
+.quantity-controls span {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    min-width: 25px;
 }
 
 /* CART */
-.cart ul{
-    list-style:none;
-    padding:0;
+.cart ul {
+    list-style: none;
+    padding: 0;
 }
 
-.cart li{
-    background:#fff3e0;
-    margin-bottom:8px;
-    padding:8px 10px;
-    border-radius:8px;
-    border-left:5px solid #ff7043;
+.cart li {
+    background: #fff3e0;
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border-left: 5px solid #ff7043;
 }
 
 /* CONFIRM MESSAGE */
-#confirmation{
-    color:#2e7d32;
-    font-weight:bold;
-    margin-top:12px;
+#confirmation {
+    color: #2e7d32;
+    font-weight: bold;
+    margin-top: 12px;
 }
 
 /* MOBILE */
-@media(max-width:600px){
+@media(max-width:600px) {
 
-.menu,.cart{
-    margin:20px 12px;
-    padding:20px;
+    .menu,
+    .cart {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+
+    .item {
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
 }
 
-.item{
-    width:100%;
-}
-
-header h1{
-    font-size:1.8rem;
-}
-
-}
 h2 {
     display: block;
     font-size: 2.5em;
@@ -195,7 +263,8 @@ h3 {
     position: absolute;
     top: 5px;
     left: 1px;
-    background: #ff9800; /* Vibrant Orange */
+    background: #ff9800;
+    /* Vibrant Orange */
     color: white;
     padding: 10px 24px;
     text-decoration: none;
@@ -205,23 +274,28 @@ h3 {
     text-transform: uppercase;
     letter-spacing: 1px;
     border: 2px solid #ffffff;
-    
+
     /* This creates the thick 3D bottom edge and drop shadow */
-    box-shadow: 0 6px 0 #c56000, 0 12px 15px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 0 #c56000, 0 12px 15px rgba(0, 0, 0, 0.4);
     transition: all 0.1s ease-in-out;
 }
 
 /* When the mouse hovers over it */
 .back-btn:hover {
-    transform: translateY(2px); /* Moves down slightly */
-    box-shadow: 0 4px 0 #c56000, 0 8px 10px rgba(0,0,0,0.4); /* Shrinks the 3D edge */
-    background: #ffa726; /* Slightly brighter orange */
+    transform: translateY(2px);
+    /* Moves down slightly */
+    box-shadow: 0 4px 0 #c56000, 0 8px 10px rgba(0, 0, 0, 0.4);
+    /* Shrinks the 3D edge */
+    background: #ffa726;
+    /* Slightly brighter orange */
 }
 
 /* When you actually click it! */
 .back-btn:active {
-    transform: translateY(6px); /* Presses all the way down */
-    box-shadow: 0 0px 0 #c56000, 0 4px 6px rgba(0,0,0,0.4); /* Removes the 3D edge completely */
+    transform: translateY(6px);
+    /* Presses all the way down */
+    box-shadow: 0 0px 0 #c56000, 0 4px 6px rgba(0, 0, 0, 0.4);
+    /* Removes the 3D edge completely */
 }
 
 /* FLOATING CART BUTTON */
@@ -231,23 +305,26 @@ h3 {
     right: 30px;
     width: 75px;
     height: 75px;
-    background: #1b4528; /* Matches your header */
+    background: #1b4528;
+    /* Matches your header */
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.2rem; /* Big cart icon */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    font-size: 2.2rem;
+    /* Big cart icon */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     cursor: pointer;
     z-index: 1000;
     transition: 0.3s;
-    border: 3px solid #ffd54f; /* Golden ring */
+    border: 3px solid #ffd54f;
+    /* Golden ring */
 }
 
 .floating-cart:hover {
     transform: scale(1.1) translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* THE RED NUMBER BADGE */
@@ -265,12 +342,13 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* THE POPUP OVERLAY (Darkens the background) */
 .cart-modal {
-    display: none; /* Hidden by default! */
+    display: none;
+    /* Hidden by default! */
     position: fixed;
     top: 0;
     left: 0;
@@ -278,7 +356,8 @@ h3 {
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
-    z-index: 1001; /* Sits on top of everything */
+    z-index: 1001;
+    /* Sits on top of everything */
     align-items: center;
     justify-content: center;
 }
@@ -291,14 +370,22 @@ h3 {
     width: 90%;
     max-width: 450px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     text-align: center;
-    animation: slideUp 0.3s ease-out; /* Smooth pop-in animation */
+    animation: slideUp 0.3s ease-out;
+    /* Smooth pop-in animation */
 }
 
 @keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* THE CLOSE 'X' BUTTON */
@@ -323,5 +410,4 @@ h3 {
     justify-content: center;
     gap: 15px;
     margin-top: 25px;
-
 }
